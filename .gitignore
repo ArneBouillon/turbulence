@@ -1,0 +1,7 @@
+output/*.dat
+output/*.vtu
+output/*.log
+*.f
+*.mod
+makefile
+amrvac
