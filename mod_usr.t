@@ -11,7 +11,7 @@ contains
         usr_set_parameters => initglobaldata_usr
         usr_init_one_grid  => initonegrid_usr
         usr_special_bc     => my_bounds
-        usr_internal_bc    => no_vr
+        usr_internal_bc    => my_internal_bounds
         usr_aux_output     => specialvar_output
         usr_add_aux_names  => specialvarnames_output
 
@@ -113,15 +113,19 @@ contains
 
     end subroutine my_bounds
 
-    subroutine no_vr(level,qt,ixI^L,ixO^L,w,x)
+    subroutine my_internal_bounds(level,qt,ixI^L,ixO^L,w,x)
         integer, intent(in) :: ixI^L,ixO^L,level
         double precision, intent(in) :: qt
         double precision, intent(inout) :: w(ixI^S,1:nw)
         double precision, intent(in) :: x(ixI^S,1:ndim)
 
-!        w(ixI^S,mom(1))=zero
+        where (x(ixO^S,1) .lt. .5 .and. x(ixO^S,1) .gt. .4 .and. (x(ixO^S,2) .lt. .3 .and. x(ixO^S,2) .gt. .2 .or. x(ixO^S,2) .lt. .8 .and. x(ixO^S,2) .gt. .7))
+            w(ixO^S,rho_) = one
+            w(ixO^S,mom(1)) = zero
+            w(ixO^S,mom(2)) = zero
+        end where
 
-    end subroutine no_vr
+    end subroutine my_internal_bounds
 
     subroutine specialvar_output(ixI^L,ixO^L,w,x,normconv)
         use mod_physics
