@@ -27,7 +27,7 @@
 /
 
  &boundlist
-  typeboundary_min1 = 3*'cont'
+  typeboundary_min1 = 3*'special'
   typeboundary_max1 = 3*'noinflow'
   typeboundary_min2 = 3*'special'
   typeboundary_max2 = 3*'special'

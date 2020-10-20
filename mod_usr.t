@@ -77,7 +77,7 @@ contains
         select case (iB)
         case(1) ! left continuous
             w(ixBmax1,:,rho_)   = w(ixBmax1+1,:,rho_)
-            w(ixBmax1,:,mom(1)) = w(ixBmax1+1,:,mom(1))
+            w(ixBmax1,:,mom(1)) = one ! w(ixBmax1+1,:,mom(1))
             w(ixBmax1,:,mom(2)) = zero !w(ixBmax1+1,:,mom(2))
             do i=ixBmin1,ixBmax1-1
                 w(i,:,:)      = w(ixBmax1,:,:)
@@ -95,14 +95,14 @@ contains
             enddo
         case(3) ! bottom
             w(:,ixBmax2,rho_)   = w(:,ixBmax2+1,rho_) ! continuous
-            w(:,ixBmax2,mom(1)) = w(:,ixBmax2+1,rho_) * v0
+            w(:,ixBmax2,mom(1)) = w(:,ixBmax2+1,mom(1))
             w(:,ixBmax2,mom(2)) = zero
             do i=ixBmin2,ixBmax2-1
                 w(:,i,:)      = w(:,ixBmax2,:)
             enddo
         case(4) ! top
             w(:,ixBmin2,rho_)   = w(:,ixBmin2-1,rho_) ! continuous
-            w(:,ixBmin2,mom(1)) = zero
+            w(:,ixBmin2,mom(1)) = w(:,ixBmin2-1,mom(1))
             w(:,ixBmin2,mom(2)) = zero
             do i=ixBmin2+1,ixBmax2
                 w(:,i,:)      = w(:,ixBmin2,:)
