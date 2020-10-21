@@ -42,14 +42,10 @@ contains
         rho0   = one
         vc_mu  = 1.d0 / Reynolds
         vc_tau = one / vc_mu
-        time_max = 0.5d0 * vc_tau
         print*, '- - -'
         print*, 'Reynolds # ', Reynolds
         print*, 'The simulation duration has been set to ', time_max
         print*, '- - -'
-        tsave(1,2)=time_max/1000.d0
-        tsave(2,2)=time_max/100.d0
-        tsave(3,2)=time_max/10.d0
 
         hd_adiab = one / Mach**two
 
@@ -119,7 +115,7 @@ contains
         double precision, intent(inout) :: w(ixI^S,1:nw)
         double precision, intent(in) :: x(ixI^S,1:ndim)
 
-        where (x(ixO^S,1) .lt. .5 .and. x(ixO^S,1) .gt. .4 .and. (x(ixO^S,2) .lt. .3 .and. x(ixO^S,2) .gt. .2 .or. x(ixO^S,2) .lt. .8 .and. x(ixO^S,2) .gt. .7))
+        where (x(ixO^S,1) .lt. .5 .and. x(ixO^S,1) .gt. .4 .and. (x(ixO^S,2) .lt. .45 .and. x(ixO^S,2) .gt. .35 .or. x(ixO^S,2) .lt. .65 .and. x(ixO^S,2) .gt. .55))
             w(ixO^S,rho_) = one
             w(ixO^S,mom(1)) = zero
             w(ixO^S,mom(2)) = zero

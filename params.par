@@ -1,7 +1,7 @@
 !setup.pl -d=2
 
  &filelist
-   base_filename    = 'output/cart_T_HR_'
+   base_filename    = 'output/turbulence_'
    autoconvert      = T
    nwauxio          = 1
    convert_type     = 'vtuBCCmpi'
@@ -12,11 +12,11 @@
    itsave(1,1)      = 0
    itsave(1,2)      = 0
    ditsave_log      = 100
-   !ditsave_dat       = 1 ! 1.d-1
+   ditsave_dat      = 10 ! 1.d-1
 /
 
  &stoplist
-   !it_max = 1
+   it_max              = 20000
    !time_max            = 2.d0
 /
 
@@ -40,8 +40,8 @@
    !refine_max_level   = 1
    block_nx1        = 16
    block_nx2        = 16
-   domain_nx1         = 128
-   domain_nx2         = 128
+   domain_nx1         = 256
+   domain_nx2         = 256
    xprobmin1       = 0.0d0
    xprobmax1       = 2.0d0
    xprobmin2       = 0.0d0
@@ -63,5 +63,5 @@
 /
 
 &my_list
-  Reynolds = 1.d0 ! 1.d-5
+  Reynolds = 1000000. ! 1.d-5
 /

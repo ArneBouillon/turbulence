@@ -1,7 +1,12 @@
 output/*.dat
 output/*.vtu
 output/*.log
+.ipynb_checkpoints/
+
 *.f
 *.mod
+
 makefile
 amrvac
+animation.gif
+
