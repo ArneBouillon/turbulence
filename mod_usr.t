@@ -136,7 +136,7 @@ contains
         do i=1,ndir
             v(ixI^S,i)=w(ixI^S,mom(i))
         enddo
-        call divvector(v,ixI^L,ixO^L,divV)
+        call curlvector(v,ixI^L,ixO^L,divV)
         w(ixO^S,nw+1) = divV(ixO^S)
 
     end subroutine specialvar_output
