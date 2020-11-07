@@ -1,12 +1,12 @@
-output/*.dat
-output/*.vtu
-output/*.log
-.ipynb_checkpoints/
+**/output/*.dat
+**/output/*.vtu
+**/output/*.log
+**/.ipynb_checkpoints/
 
-*.f
-*.mod
+**/*.f
+**/*.mod
 
-makefile
-amrvac
-animation.gif
+**/makefile
+**/amrvac
+**/animation.gif
 
