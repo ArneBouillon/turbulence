@@ -6,7 +6,8 @@
    nwauxio           = 1
    convert_type      = 'vtuBCCmpi'
    saveprim          = F
-   restart_from_file = 'output/turbulence_0335.dat'
+!   restart_from_file = 'output/turbulence_0335.dat'
+   convert_type      = "user"
  /
 
  &savelist
