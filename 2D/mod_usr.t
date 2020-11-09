@@ -11,11 +11,11 @@ contains
     subroutine usr_init()
         use mod_variables
 
-        usr_set_parameters => initglobaldata_usr
-        usr_modify_output  => specialvar_output
-        usr_init_one_grid  => initonegrid_usr
-        usr_special_bc     => my_bounds
-        usr_internal_bc    => my_internal_bounds
+        usr_set_parameters  => initglobaldata_usr
+        usr_modify_output   => specialvar_output
+        usr_init_one_grid   => initonegrid_usr
+        usr_special_bc      => my_bounds
+        usr_internal_bc     => my_internal_bounds
         !usr_add_aux_names  => specialvarnames_output
         usr_special_convert => do_nothing
 

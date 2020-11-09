@@ -5,15 +5,18 @@ module mod_usr
     implicit none
     double precision :: Reynolds
     double precision :: v0, rho0
+    integer :: indexCurlV
 
 contains
     subroutine usr_init()
+        use mod_variables
+
         usr_set_parameters  => initglobaldata_usr
+        usr_modify_output   => specialvar_output
         usr_init_one_grid   => initonegrid_usr
         usr_special_bc      => my_bounds
         usr_internal_bc     => my_internal_bounds
-        usr_aux_output      => specialvar_output
-        usr_add_aux_names   => specialvarnames_output
+        !usr_add_aux_names  => specialvarnames_output
         usr_special_convert => do_nothing
 
         call hd_activate()
@@ -21,6 +24,7 @@ contains
 
         call set_coordinate_system('Cartesian_2D')
 
+        indexCurlV = var_set_extravar("curlV", "curlV")
     end subroutine usr_init
 
     subroutine params_read(files)
@@ -134,29 +138,23 @@ contains
 
     end subroutine my_internal_bounds
 
-    subroutine specialvar_output(ixI^L,ixO^L,w,x,normconv)
+    subroutine specialvar_output(ixI^L,ixO^L,qt, w,x)
         use mod_physics
 
         integer, intent(in)                :: ixI^L,ixO^L
-        double precision, intent(in)       :: x(ixI^S,1:ndim)
-        double precision                   :: w(ixI^S,nw+nwauxio)
-        double precision                   :: normconv(0:nw+nwauxio)
-        double precision                   :: v(ixI^S,ndir), divV(ixI^S)
+        double precision, intent(in)       :: qt, x(ixI^S,1:ndim)
+        double precision, intent(inout)    :: w(ixI^S,nw)
+        double precision                   :: v(ixI^S,ndir), curlV(ixI^S)
         integer                            :: i
+        integer                            :: idirmin,idir
 
         do i=1,ndir
             v(ixI^S,i)=w(ixI^S,mom(i))
         enddo
-        call divvector(v,ixI^L,ixO^L,divV)
-        w(ixO^S,nw+1) = divV(ixO^S)
+        call curlvector(v,ixI^L,ixO^L,curlV,idirmin,7-2*ndir,ndir)
+        w(ixO^S,indexCurlV) = curlV(ixO^S)
 
     end subroutine specialvar_output
-
-    subroutine specialvarnames_output(varnames)
-        character(len=*) :: varnames
-        varnames='divV'
-
-    end subroutine specialvarnames_output
 
     subroutine do_nothing(qunitconvert)
         integer, intent(in) :: qunitconvert
