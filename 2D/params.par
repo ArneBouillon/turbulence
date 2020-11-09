@@ -3,9 +3,10 @@
  &filelist
    base_filename    = 'output/turbulence_'
    autoconvert      = T
-   nwauxio          = 1
+   !nwauxio          = 1
    convert_type     = 'vtuBCCmpi'
    saveprim         = F
+   convert_type      = "user"
  /
 
  &savelist
