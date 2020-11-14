@@ -120,7 +120,7 @@ contains
         double precision, intent(inout) :: w(ixI^S,1:nw)
         double precision, intent(in) :: x(ixI^S,1:ndim)
 
-        where (x(ixO^S,1) .lt. .85 .and. x(ixO^S,1) .gt. .75 .and. ((x(ixO^S,2) .lt. 1.2 .and. x(ixO^S,2) .gt. 1.1) .or. (x(ixO^S,2) .lt. 1.7 .and. x(ixO^S,2) .gt. 1.6)))
+        where (x(ixO^S,1) .lt. 8.5 .and. x(ixO^S,1) .gt. 7.5 .and. ((x(ixO^S,2) .lt. 12.5 .and. x(ixO^S,2) .gt. 11.5) .or. (x(ixO^S,2) .lt. 18.5 .and. x(ixO^S,2) .gt. 17.5)))
             w(ixO^S,rho_) = one
             w(ixO^S,mom(1)) = zero
             w(ixO^S,mom(2)) = zero
