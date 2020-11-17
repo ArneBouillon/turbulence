@@ -45,7 +45,7 @@ contains
         double precision :: vc_tau, Mach=1.d0
         v0     = one
         rho0   = one
-        vc_mu  = 1.d0 / Reynolds
+        vc_mu  = v0*1.0d / Reynolds
         vc_tau = one / vc_mu
         print*, '- - -'
         print*, 'Reynolds # ', Reynolds
@@ -78,7 +78,7 @@ contains
         select case (iB)
         case(1) ! left continuous
             w(ixBmax1,:,rho_)   = w(ixBmax1+1,:,rho_)
-            w(ixBmax1,:,mom(1)) = one ! w(ixBmax1+1,:,mom(1))
+            w(ixBmax1,:,mom(1)) = v0 ! w(ixBmax1+1,:,mom(1))
             w(ixBmax1,:,mom(2)) = zero !w(ixBmax1+1,:,mom(2))
             do i=ixBmin1,ixBmax1-1
                 w(i,:,:)      = w(ixBmax1,:,:)
@@ -121,7 +121,7 @@ contains
         double precision, intent(in) :: x(ixI^S,1:ndim)
 
         where (x(ixO^S,1) .lt. 8.5 .and. x(ixO^S,1) .gt. 7.5 .and. ((x(ixO^S,2) .lt. 12.5 .and. x(ixO^S,2) .gt. 11.5) .or. (x(ixO^S,2) .lt. 18.5 .and. x(ixO^S,2) .gt. 17.5)))
-            w(ixO^S,rho_) = one
+            w(ixO^S,rho_) = rho0
             w(ixO^S,mom(1)) = zero
             w(ixO^S,mom(2)) = zero
         end where
