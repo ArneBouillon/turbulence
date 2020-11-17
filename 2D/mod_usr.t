@@ -45,7 +45,7 @@ contains
         double precision :: vc_tau, Mach=1.d0
         v0     = one
         rho0   = one
-        vc_mu  = v0*1.0d / Reynolds
+        vc_mu  = v0 / Reynolds
         vc_tau = one / vc_mu
         print*, '- - -'
         print*, 'Reynolds # ', Reynolds
