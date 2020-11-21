@@ -8,7 +8,7 @@ from matplotlib import rc_context
 
 R    = 'r0708658'
 name = sys.argv[1]
-path = f'/cw/lvs/NoCsBack/vakken/ac2021/G0B30A/{R}/output{name}'
+path = f'/cw/lvs/NoCsBack/vakken/ac2021/G0B30A/{R}/output_{name}'
 
 
 
