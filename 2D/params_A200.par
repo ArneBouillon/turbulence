@@ -67,4 +67,5 @@
 
 &my_list
   Reynolds = 2500. ! 1.d-5
+  v0 = 5.0d0
 /

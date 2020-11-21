@@ -41,10 +41,10 @@
  &meshlist
    !refine_criterion   = 3
    refine_max_level   = 1
-   block_nx1        = 10
-   block_nx2        = 10
-   domain_nx1         = 50 
-   domain_nx2         = 50
+   block_nx1        = 16
+   block_nx2        = 16
+   domain_nx1         = 800 
+   domain_nx2         = 800
    xprobmin1       = 0.0d0
    xprobmax1       = 35.0d0
    xprobmin2       = 0.0d0
@@ -67,5 +67,5 @@
 
 &my_list
   Reynolds = 2500. ! 1.d-5
-  v0 = 5.0d0
+  v0       = 10.0d0
 /

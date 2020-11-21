@@ -31,7 +31,7 @@ contains
         character(len=*), intent(in) :: files(:)
         integer                      :: n
 
-        namelist /my_list/ Reynolds
+        namelist /my_list/ Reynolds,v0
 
         do n = 1, size(files)
             open(unitpar, file=trim(files(n)), status="old")
@@ -43,7 +43,6 @@ contains
 
     subroutine initglobaldata_usr
         double precision :: vc_tau, Mach=1.d0
-        v0     = one * 5.0d0
         rho0   = one
         vc_mu  = v0 / Reynolds
         vc_tau = one / vc_mu
