@@ -2,11 +2,12 @@
 
 import yt # 3.6.0 or higher
 import sys
+import subprocess
 
 from matplotlib.animation import FuncAnimation, FFMpegWriter
 from matplotlib import rc_context
 
-R    = 'r0708658'
+R    = subprocess.check_output('whoami').decode().strip()
 name = sys.argv[1]
 path = f'/cw/lvs/NoCsBack/vakken/ac2021/G0B30A/{R}/output_{name}'
 
