@@ -1,3 +1,6 @@
 #!/bin/sh
 
-mpirun -np 4 ./amrvac -i "params_$1.par" && python3 animate.py "$1"
+mkdir -p "/cw/lvs/NoCsBack/vakken/ac2021/G0B30A/$(whoami)/output_$1" && \
+	sed "s/output\//\/cw\/lvs\/NoCsBack\/vakken\/ac2021\/G0B30A\/$(whoami)\/output_$1\//g" "params_$1.par" > params_temp.par && \
+	mpirun -np 4 ./amrvac -i "params_temp.par" && \
+	python3 animate.py "$1"
