@@ -43,7 +43,7 @@ contains
 
     subroutine initglobaldata_usr
         double precision :: vc_tau, Mach=1.d0
-        v0     = one
+        v0     = one * 5.0d0
         rho0   = one
         vc_mu  = v0 / Reynolds
         vc_tau = one / vc_mu
