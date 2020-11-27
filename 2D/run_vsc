@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cores=${2:-"4"}
+
+mkdir -p "$VSC_SCRATCH/output_$1$2" && \
+	sed "s/output\//$(printf $VSC_SCRATCH | sed 's/\//\\\//g')\/output_$1$2\//g" "params_$1.par" > params_temp.par && \
+	cp params_temp.par "$VSC_SCRATCH/output_$1$2/params.par" && \
+	(time sh -c "mpirun -np $cores ./amrvac -i 'params_temp.par' 2> /dev/null") 2> "$VSC_SCRATCH/output_$1$2/info.txt"
