@@ -52,6 +52,7 @@ contains
         print*, '- - -'
 
         hd_adiab = one / Mach**two
+	hd_gamma = 10.0d0
 
         if (hd_energy) call mpistop("Blabla")
 
