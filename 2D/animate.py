@@ -9,7 +9,7 @@ from matplotlib import rc_context
 
 R    = subprocess.check_output('whoami').decode().strip()
 name = sys.argv[1]
-path = f'/cw/lvs/NoCsBack/vakken/ac2021/G0B30A/{R}/output_{name}'
+path = f'/cw/lvs/NoCsBack/vakken/ac2021/G0B30A/{R}/output2_{name}'
 
 
 
