@@ -36,24 +36,23 @@
   typeboundary_min3 = 4*'special'
   typeboundary_max3 = 4*'special'
   internalboundary = T
-  nghostcells = 3
 /
 
  &meshlist
    !refine_criterion   = 3
-   !refine_max_level   = 1
-   block_nx1       = 16
-   block_nx2       = 16
-   block_nx3       = 16
+   refine_max_level   = 3
+   block_nx1       = 4
+   block_nx2       = 4
+   block_nx3       = 4
    domain_nx1      = 32 
    domain_nx2      = 32
-   domain_nx3      = 32
+   domain_nx3      = 8
    xprobmin1       = 0.0d0
-   xprobmax1       = 3.5d0
+   xprobmax1       = 35.0d0
    xprobmin2       = 0.0d0
-   xprobmax2       = 2.8d0
+   xprobmax2       = 30.0d0
    xprobmin3       = 0.0d0
-   xprobmax3       = 2.0d0
+   xprobmax3       = 5.0d0
  /
 
  &hd_list
@@ -71,5 +70,6 @@
 /
 
 &my_list
-  Reynolds = 25000. ! 1.d-5
+  Reynolds = 2500. ! 1.d-5
+  v0 = 5.0d0
 /

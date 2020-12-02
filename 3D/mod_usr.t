@@ -5,14 +5,14 @@ module mod_usr
     implicit none
     double precision :: Reynolds
     double precision :: v0, rho0
-    integer :: indexCurlV
+    integer :: index1
 
 contains
     subroutine usr_init()
         use mod_variables
 
         usr_set_parameters  => initglobaldata_usr
-        usr_modify_output   => specialvar_output
+        !usr_modify_output   => specialvar_output
         usr_init_one_grid   => initonegrid_usr
         usr_special_bc      => my_bounds
         usr_internal_bc     => my_internal_bounds
@@ -24,14 +24,14 @@ contains
 
         call set_coordinate_system('Cartesian_2D')
 
-        indexCurlV = var_set_extravar("curlV", "curlV")
+        !index1 = var_set_extravar("curlV", "curlV")
     end subroutine usr_init
 
     subroutine params_read(files)
         character(len=*), intent(in) :: files(:)
         integer                      :: n
 
-        namelist /my_list/ Reynolds
+        namelist /my_list/ Reynolds,v0
 
         do n = 1, size(files)
             open(unitpar, file=trim(files(n)), status="old")
@@ -43,9 +43,8 @@ contains
 
     subroutine initglobaldata_usr
         double precision :: vc_tau, Mach=1.d0
-        v0     = one
         rho0   = one
-        vc_mu  = 1.d0 / Reynolds
+        vc_mu  = v0 / Reynolds
         vc_tau = one / vc_mu
         print*, '- - -'
         print*, 'Reynolds # ', Reynolds
@@ -53,6 +52,7 @@ contains
         print*, '- - -'
 
         hd_adiab = one / Mach**two
+        hd_gamma = 10.0d0
 
         if (hd_energy) call mpistop("Blabla")
 
@@ -79,7 +79,7 @@ contains
         select case (iB)
         case(1) ! left continuous
             w(ixBmax1,:,:,rho_)   = w(ixBmax1+1,:,:,rho_)
-            w(ixBmax1,:,:,mom(1)) = one
+            w(ixBmax1,:,:,mom(1)) = v0
             w(ixBmax1,:,:,mom(2)) = zero
             w(ixBmax1,:,:,mom(3)) = zero
             do i=ixBmin1,ixBmax1-1
@@ -120,7 +120,6 @@ contains
         case default
             call mpistop('BC not implemented')
         end select
-
     end subroutine my_bounds
 
     subroutine my_internal_bounds(level,qt,ixI^L,ixO^L,w,x)
@@ -129,8 +128,8 @@ contains
         double precision, intent(inout) :: w(ixI^S,1:nw)
         double precision, intent(in) :: x(ixI^S,1:ndim)
 
-        where (x(ixO^S,1) .lt. .85 .and. x(ixO^S,1) .gt. .75 .and. ((x(ixO^S,2) .lt. 1.2 .and. x(ixO^S,2) .gt. 1.1) .or. (x(ixO^S,2) .lt. 1.7 .and. x(ixO^S,2) .gt. 1.6)))
-            w(ixO^S,rho_) = one
+        where (x(ixO^S,1) .lt. 8.5 .and. x(ixO^S,1) .gt. 7.5 .and. ((x(ixO^S,2) .lt. 12.5 .and. x(ixO^S,2) .gt. 11.5) .or. (x(ixO^S,2) .lt. 18.5 .and. x(ixO^S,2) .gt. 17.5)))
+            w(ixO^S,rho_) = rho0
             w(ixO^S,mom(1)) = zero
             w(ixO^S,mom(2)) = zero
             w(ixO^S,mom(3)) = zero
@@ -152,7 +151,7 @@ contains
             v(ixI^S,i)=w(ixI^S,mom(i))
         enddo
         call curlvector(v,ixI^L,ixO^L,curlV,idirmin,7-2*ndir,ndir)
-        w(ixO^S,indexCurlV) = curlV(ixO^S)
+        w(ixO^S,index1) = curlV(ixO^S)
 
     end subroutine specialvar_output
 
