@@ -24,8 +24,6 @@ axis square;
 cores = [ 1 4 16 ];
 timings = [ (4*60+44) (3*60+47) (4*60+45) ];
 
-
-
 figure(1);
 semilogx(cores, timings, "-x", "Color", dark_blue, "LineWidth", 1.5, "MarkerSize", 12);
 xlabel("Number of cores and grid size", "interpreter", "Latex");
