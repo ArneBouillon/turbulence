@@ -121,7 +121,6 @@ contains
         double precision, intent(in) :: x(ixI^S,1:ndim)
 
         where (x(ixO^S,1) .lt. 8.5 .and. x(ixO^S,1) .gt. 7.5 .and. ((x(ixO^S,2) .lt. 12.5 .and. x(ixO^S,2) .gt. 11.5) .or. (x(ixO^S,2) .lt. 18.5 .and. x(ixO^S,2) .gt. 17.5)))
-            w(ixO^S,rho_) = rho0
             w(ixO^S,mom(1)) = zero
             w(ixO^S,mom(2)) = zero
         end where
