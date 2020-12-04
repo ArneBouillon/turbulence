@@ -2,7 +2,7 @@ dark_blue = [ 0.067, 0.431, 0.541 ];
 blue = [ 0.11,0.55,0.69 ];
 
 sizes = [ 50 100 200 400 800 ];
-timings = [ 2*60+19 5*60+7 20*60+55 1*3600+8*60+1 4*3600+28*60+29 ];
+timings = [ 3*60+9 10*60+7 44*60+7 2*3600+20*60+7 9*3600+14*60+22 ];
 
 figure(1); clf;
 loglog(sizes, timings, "-x", "Color", dark_blue, "LineWidth", 1.5, "MarkerSize", 12);
