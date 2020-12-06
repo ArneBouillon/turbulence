@@ -37,3 +37,24 @@ set(gca, 'FontName', 'Times New Roman')
 set(gca,'XMinorTick','off')
 axis square;
 
+
+%% strong scaling
+
+timesteps = [ 1 3 5 ];
+timings = [ 56375.85 147375.00  333454.83 ];
+
+fourstep = 170883.72;
+
+figure(1); clf; 
+semilogy(timesteps, timings, "-x", "Color", dark_blue, "LineWidth", 1.5, "MarkerSize", 12);
+xlabel('\texttt{time\_stepper}', "interpreter", "Latex");
+ylabel("CPU-time [s]", "interpreter", "Latex");
+ylim([1e4 1e6]);
+xlim([min(timesteps)-0.2 max(timesteps)+.2]);
+xticks(timesteps);
+xticklabels({'\texttt{onestep}', '\texttt{threestep}', '\texttt{fourstep}', '\texttt{fivestep}'}); set(gca,'TickLabelInterpreter','latex');
+xtickangle(45)
+%title("Strong scaling", "interpreter", "Latex")
+set(gca, 'FontName', 'Arial')
+set(gca,'XMinorTick','off')
+axis square;
